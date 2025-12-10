@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
-struct trailmemoApp: App {
+struct TrailMemoApp: App {
+    // Initialize Firebase when app starts
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

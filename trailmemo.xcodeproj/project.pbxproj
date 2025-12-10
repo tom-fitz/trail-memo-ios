@@ -6,13 +6,34 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		094790A92EE90138000A9643 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 094790A82EE90138000A9643 /* FirebaseAuth */; };
+		094790AB2EE90138000A9643 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 094790AA2EE90138000A9643 /* FirebaseStorage */; };
+		094790AD2EE90212000A9643 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 094790AC2EE90212000A9643 /* GoogleService-Info.plist */; };
+		094790C82EE91595000A9643 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 094790C72EE91595000A9643 /* MapboxMaps */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		094790932EE9007F000A9643 /* trailmemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trailmemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		094790AC2EE90212000A9643 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		094790B72EE90855000A9643 /* Exceptions for "trailmemo" folder in "trailmemo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 094790922EE9007F000A9643 /* trailmemo */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		094790952EE9007F000A9643 /* trailmemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				094790B72EE90855000A9643 /* Exceptions for "trailmemo" folder in "trailmemo" target */,
+			);
 			path = trailmemo;
 			sourceTree = "<group>";
 		};
@@ -23,6 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				094790C82EE91595000A9643 /* MapboxMaps in Frameworks */,
+				094790A92EE90138000A9643 /* FirebaseAuth in Frameworks */,
+				094790AB2EE90138000A9643 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34,6 +58,7 @@
 			children = (
 				094790952EE9007F000A9643 /* trailmemo */,
 				094790942EE9007F000A9643 /* Products */,
+				094790AC2EE90212000A9643 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +90,9 @@
 			);
 			name = trailmemo;
 			packageProductDependencies = (
+				094790A82EE90138000A9643 /* FirebaseAuth */,
+				094790AA2EE90138000A9643 /* FirebaseStorage */,
+				094790C72EE91595000A9643 /* MapboxMaps */,
 			);
 			productName = trailmemo;
 			productReference = 094790932EE9007F000A9643 /* trailmemo.app */;
@@ -94,6 +122,10 @@
 			);
 			mainGroup = 0947908A2EE9007F000A9643;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				094790A72EE90138000A9643 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				094790C62EE91595000A9643 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 094790942EE9007F000A9643 /* Products */;
 			projectDirPath = "";
@@ -109,6 +141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				094790AD2EE90212000A9643 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +289,11 @@
 				DEVELOPMENT_TEAM = 5ZKP6T4RU6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = trailmemo/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "TrailMemo needs your location to tag memos with GPS coordinates";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TrailMemo needs your location to tag memos with GPS coordinates";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TrailMemo needs microphone access to record voice memos";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "TrailMemo needs speech recognition to transcribe your voice memos as you speak";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -288,6 +326,11 @@
 				DEVELOPMENT_TEAM = 5ZKP6T4RU6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = trailmemo/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "TrailMemo needs your location to tag memos with GPS coordinates";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TrailMemo needs your location to tag memos with GPS coordinates";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TrailMemo needs microphone access to record voice memos";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "TrailMemo needs speech recognition to transcribe your voice memos as you speak";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -332,6 +375,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		094790A72EE90138000A9643 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.6.0;
+			};
+		};
+		094790C62EE91595000A9643 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		094790A82EE90138000A9643 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 094790A72EE90138000A9643 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		094790AA2EE90138000A9643 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 094790A72EE90138000A9643 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		094790C72EE91595000A9643 /* MapboxMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 094790C62EE91595000A9643 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
+			productName = MapboxMaps;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0947908B2EE9007F000A9643 /* Project object */;
 }
