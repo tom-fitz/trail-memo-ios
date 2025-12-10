@@ -85,7 +85,8 @@ class APIClient {
         }
         
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+//        letting custom decoded do it.
+//        decoder.dateDecodingStrategy = .iso8601
         return try decoder.decode(Memo.self, from: data)
     }
     

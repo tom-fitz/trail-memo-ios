@@ -12,6 +12,7 @@ struct MapView: View {
     @StateObject private var viewModel = MapViewModel()
     @ObservedObject var authViewModel: AuthViewModel
     @State private var showStylePicker = false
+    @State private var showCreateMemo = false
     
     var body: some View {
         ZStack {
@@ -85,6 +86,22 @@ struct MapView: View {
                                 .shadow(radius: 3)
                         }
                         
+                        // Refresh button
+                        Button(action: {
+                            viewModel.refresh()
+                        }) {
+                            Image(systemName: "arrow.clockwise")
+                                .font(.system(size: 20))
+                                .foregroundColor(viewModel.isLoading ? .blue : .gray)
+                                .frame(width: 44, height: 44)
+                                .background(Color.white)
+                                .cornerRadius(8)
+                                .shadow(radius: 3)
+                        }
+                        .disabled(viewModel.isLoading)
+                        .rotationEffect(.degrees(viewModel.isLoading ? 360 : 0))
+                        .animation(viewModel.isLoading ? .linear(duration: 1).repeatForever(autoreverses: false) : .default, value: viewModel.isLoading)
+                        
                         // Style picker dropdown
                         if showStylePicker {
                             VStack(spacing: 0) {
@@ -128,51 +145,28 @@ struct MapView: View {
                 
                 Spacer()
                 
-                // Legend (bottom left)
+                // Bottom left corner stack
                 HStack {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Map Legend")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(.primary)
-                        
-                        HStack(spacing: 6) {
-                            Rectangle()
-                                .fill(Color.green.opacity(0.3))
-                                .frame(width: 16, height: 16)
-                                .cornerRadius(2)
-                            Text("Parks & Recreation")
-                                .font(.system(size: 11))
-                                .foregroundColor(.secondary)
-                        }
-                        
-                        HStack(spacing: 6) {
-                            Rectangle()
-                                .fill(Color.orange)
-                                .frame(width: 16, height: 2)
-                            Text("Trails & Paths")
-                                .font(.system(size: 11))
-                                .foregroundColor(.secondary)
-                        }
-                        
-                        HStack(spacing: 6) {
-                            Circle()
-                                .fill(
+                    VStack(alignment: .leading, spacing: 16) {
+                        // Create Memo Button (floating action button)
+                        Button(action: {
+                            showCreateMemo = true
+                        }) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(.white)
+                                .frame(width: 64, height: 64)
+                                .background(
                                     LinearGradient(
-                                        colors: [.red, .blue, .green],
+                                        colors: [Color.blue, Color.purple],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     )
                                 )
-                                .frame(width: 16, height: 16)
-                            Text("Memo Locations")
-                                .font(.system(size: 11))
-                                .foregroundColor(.secondary)
+                                .clipShape(Circle())
+                                .shadow(radius: 8)
                         }
                     }
-                    .padding(12)
-                    .background(Color.white)
-                    .cornerRadius(8)
-                    .shadow(radius: 3)
                     .padding()
                     
                     Spacer()
@@ -180,25 +174,44 @@ struct MapView: View {
             }
             
             // Memo detail sheet
+//            if let memo = viewModel.selectedMemo {
+//                Color.black.opacity(0.3)
+//                    .ignoresSafeArea()
+//                    .onTapGesture {
+//                        viewModel.deselectMemo()
+//                    }
+//                
+//                VStack {
+//                    Spacer()
+//                    
+//                    MemoDetailCard(
+//                        memo: memo,
+//                        onClose: {
+//                            viewModel.deselectMemo()
+//                        }
+//                    )
+//                    .padding()
+//                }
+//            }
             if let memo = viewModel.selectedMemo {
-                Color.black.opacity(0.3)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        viewModel.deselectMemo()
+                Color.clear
+                    .sheet(item: Binding(
+                        get: { viewModel.selectedMemo },
+                        set: { viewModel.selectedMemo = $0 }
+                    )) { memo in
+                        MemoDetailCard(memo: memo)
                     }
-                
-                VStack {
-                    Spacer()
-                    
-                    MemoDetailCard(
-                        memo: memo,
-                        onClose: {
-                            viewModel.deselectMemo()
-                        }
-                    )
-                    .padding()
-                }
             }
+        }
+        .sheet(isPresented: $showCreateMemo) {
+            CreateMemoView(onMemoCreated: {
+                print("🔄 onMemoCreated callback received in MapView")
+                Task {
+                    print("🔄 Starting fetchMemos refresh...")
+                    await viewModel.fetchMemos()
+                    print("🔄 fetchMemos completed")
+                }
+            })
         }
         .task {
             await viewModel.fetchMemos()

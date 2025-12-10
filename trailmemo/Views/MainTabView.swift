@@ -11,20 +11,33 @@ import FirebaseAuth
 struct MainTabView: View {
     @ObservedObject var authViewModel: AuthViewModel
     
+    init(authViewModel: AuthViewModel) {
+        self.authViewModel = authViewModel
+        
+        // Force tab bar to show
+        UITabBar.appearance().isTranslucent = true
+        UITabBar.appearance().backgroundColor = UIColor.systemBackground
+    }
+    
     var body: some View {
         TabView {
-            // Real Map view
+            // Map view
             MapView(authViewModel: authViewModel)
                 .tabItem {
-                    Label("Map", systemImage: "map")
+                    Image(systemName: "map.fill")
+                    Text("Map")
                 }
+                .tag(0)
             
             // Profile view
             ProfileView(authViewModel: authViewModel)
                 .tabItem {
-                    Label("Profile", systemImage: "person.circle")
+                    Image(systemName: "person.circle.fill")
+                    Text("Profile")
                 }
+                .tag(1)
         }
+        .accentColor(.blue)
     }
 }
 
